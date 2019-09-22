@@ -44,4 +44,4 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list \
   && apt-get autoremove -y \
   && rm -rf /opt/* /var/lib/apt/lists/* /var/cache/* /usr/include/*
 
-CMD ["dust3d"]
+ENTRYPOINT ["dust3d"]

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+set -e
+set -x
+
+docker build --file=Dockerfile.anki --tag=anki .
+docker build --file=Dockerfile.dust3d --tag=dust3d .
+docker build --file=Dockerfile.luastyle --tag=luastyle .
+docker build --file=Dockerfile.xubuntu --tag=xubuntu:18.04 .
