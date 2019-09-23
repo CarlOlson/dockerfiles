@@ -1,0 +1,7 @@
+FROM rust:1.37.0-stretch
+
+RUN cargo install pastel
+
+ENV PASTEL_COLOR_MODE=24bit
+
+ENTRYPOINT ["pastel"]
