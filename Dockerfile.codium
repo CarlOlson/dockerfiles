@@ -1,0 +1,23 @@
+FROM debian:buster
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -q && \
+    # install essentials
+    apt-get install -y --no-install-recommends \
+      dbus-x11 libxv1 libx11-xcb1 wget && \
+    \
+    # install vscodium dependencies
+    apt-get install -y --no-install-recommends \
+      libnotify4 libnss3 gnupg libxkbfile1 libsecret-1-0 libgtk-3-0 libxss1 libxtst6 libasound2 && \
+    \
+    # install vscodium
+    wget -O /tmp/codium.deb --no-check-certificate --progress=bar:force \
+      https://github.com/VSCodium/vscodium/releases/download/1.41.1/codium_1.41.1-1576787344_amd64.deb && \
+    dpkg -i /tmp/codium.deb && \
+    rm /tmp/codium.deb && \
+    \
+    # remove apt-get cache
+    rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["codium", "--wait"]
