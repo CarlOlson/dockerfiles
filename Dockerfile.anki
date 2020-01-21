@@ -1,11 +1,18 @@
 # anki
 #
 # Use x11docker to run image.
+# CJK fonts included for language learning.
 
-FROM x11docker/xfce
+FROM debian:buster
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends anki \
+  && apt-get install -y --no-install-recommends \
+    dbus-x11 fonts-takao fonts-arphic-ukai fonts-arphic-uming \
+    fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core anki \
+  && apt-get -qy autoremove \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["anki"]
