@@ -1,0 +1,16 @@
+FROM ubuntu:19.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update
+
+RUN apt-get install -y --no-install-recommends git build-essential ca-certificates cmake
+
+RUN git clone https://github.com/akermu/emacs-libvterm /opt/emacs-libvterm
+
+RUN apt-get install -y --no-install-recommends libtool-bin
+
+RUN mkdir /opt/emacs-libvterm/build \
+  && cd /opt/emacs-libvterm/build \
+  && cmake .. \
+  && make
